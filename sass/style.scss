@@ -1,0 +1,37 @@
+.button-holder {
+    display: flex;
+    justify-content: center;
+    height: 400px;
+    .btn {
+        height: 50px;
+        border: none;
+        border-radius: 3px;
+        padding: 15px 32px;
+        text-align: center;
+        text-decoration: none;
+        font-size: 20px;
+        margin: 15px;
+        color:  #fff;
+        &:hover {
+            cursor: pointer;
+        }
+    }
+    #btn-rock {
+        background-color: #5A4D41; 
+        &:hover {
+            border: dashed 3px #5A4D41;
+        }
+    }
+    #btn-paper {
+        background-color: #e0d3af;
+        &:hover {
+            border: dashed 3px #e0d3af;
+        }
+    }
+    #btn-scissors {
+        background-color: #d442f4;
+        &:hover {
+            border: dashed 3px #d442f4;
+        }
+    }
+}
