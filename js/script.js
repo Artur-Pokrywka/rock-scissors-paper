@@ -19,34 +19,34 @@ function playerMove(playerChoice) {
     }
 
             // sporo wątpliwości 
-    if (computerMove === playerChoice) {
-        alert("Draw");
+    if (playerChoice === computerMove) {
+        console.log("Draw");
     }
 
-    else if (computerMove === "paper") {
-        if (playerChoice[0]) {
-            alert("Player lost");
+    else if (playerChoice[0] === "rock") {
+        if (computerMove === "paper") {
+            console.log("Player lost");
         }
         else {
-            alert("Player won");
+            console.log("Player won");
         }
     }
     
-    else if (computerMove === "rock") {
-        if (playerChoice[1]) {
-            alert("Player lost");
+    else if (playerChoice[1] === "scissors") {
+        if (computerMove === "rock") {
+            console.log("Player lost");
         }
         else {
-            alert("Player won");
+            console.log("Player won");
         }
     } 
 
-    else if (computerMove === "scissors") {
-        if (playerChoice[2]) {
-            alert("Player lost");
+    else if (playerChoice[2] === "paper") {
+        if (computerMove === "scissors") {
+            console.log("Player lost");
         }
         else {
-            alert("Player won");
+            console.log("Player won");
         }
     }     
 };
