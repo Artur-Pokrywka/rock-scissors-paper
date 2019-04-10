@@ -8,35 +8,35 @@ var playerScore = 0;
 var computerScore = 0;
 
 function playerScoreincrease() {
-    playerScore = playerScore ++;
+    playerScore ++;
     console.log(playerScore)
+    document.getElementById("player-result").innerHTML = "Player score: " + playerScore;
 };
-document.getElementById("result").innerHTML = "Player score: " + playerScore;
-
 
 function computerScoreincrease() {
-    computerScore = computerScore ++;
+   computerScore ++;
+   document.getElementById("computer-result").innerHTML = "Computer score: " + computerScore;
 };
-document.getElementById("result").innerHTML = "Player score: " + computerScore;
 
 
-function computerChoice() {
+function computerChoicedraw() {
     var number = Math.floor(Math.random() * 3) + 1;  
+    var computerMove;
     if (number === 1) {
-        var computerMove = "paper";
+        computerMove = "paper";
         console.log (computerMove)
     } else if (number === 2) {
-        var computerMove = "rock";
+        computerMove = "rock";
         console.log (computerMove)
     } else  {
-        var computerMove = "scissors";
+        computerMove = "scissors";
         console.log (computerMove)
     }
     return computerMove;
 };
 
 function playerMove(playerChoice) {
-    var computerMove = computerChoice();
+    var computerMove = computerChoicedraw();
     
     if (playerChoice === computerMove) {
         document.getElementById("output").innerHTML = "It's a DRAW!";
@@ -54,17 +54,21 @@ function playerMove(playerChoice) {
     else if (playerChoice === "scissors") {
         if (computerMove === "rock") {
             document.getElementById("output").innerHTML = "You LOOSE: you played SCISSORS, computer played ROCK!";
+            computerScoreincrease();
         }
         else {
             document.getElementById("output").innerHTML = "You WON: you played SCISSORS, computer played PAPER!";
+            playerScoreincrease();
         }
     } 
     else if (playerChoice === "paper") {
         if (computerMove === "scissors") {
             document.getElementById("output").innerHTML = "You LOOSE: you played PAPER, computer played SCISSORS!";
+            computerScoreincrease();
         }
         else {
             document.getElementById("output").innerHTML = "You WON: you played PAPER, computer played ROCK!";
+            playerScoreincrease();
         }
     }     
 };
