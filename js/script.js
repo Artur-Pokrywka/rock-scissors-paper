@@ -20,38 +20,33 @@ function playerMove(playerChoice) {
 
             // sporo wątpliwości 
     if (playerChoice === computerMove) {
-        console.log("Draw");
+        document.getElementById("output").innerHTML = "It's a DRAW!";
     }
-
-    else if (playerChoice[0] === "rock") {
+    else if (playerChoice === "rock") {
         if (computerMove === "paper") {
-            console.log("Player lost");
+            document.getElementById("output").innerHTML = "You LOOSE: you played ROCK, computer played PAPER!";
         }
         else {
-            console.log("Player won");
+            document.getElementById("output").innerHTML = "You WON: you played ROCK, computer played SCISSORS!";
         }
-    }
-    
-    else if (playerChoice[1] === "scissors") {
+    }   
+    else if (playerChoice === "scissors") {
         if (computerMove === "rock") {
-            console.log("Player lost");
+            document.getElementById("output").innerHTML = "You LOOSE: you played SCISSORS, computer played ROCK!";
         }
         else {
-            console.log("Player won");
+            document.getElementById("output").innerHTML = "You WON: you played SCISSORS, computer played PAPER!";
         }
     } 
-
-    else if (playerChoice[2] === "paper") {
+    else if (playerChoice === "paper") {
         if (computerMove === "scissors") {
-            console.log("Player lost");
+            document.getElementById("output").innerHTML = "You LOOSE: you played PAPER, computer played SCISSORS!";
         }
         else {
-            console.log("Player won");
+            document.getElementById("output").innerHTML = "You WON: you played PAPER, computer played ROCK!";
         }
     }     
 };
-
-
 
 buttonRock.addEventListener('click', function() {
     playerMove(playerChoice[0]);
@@ -65,3 +60,4 @@ buttonPaper.addEventListener('click', function() {
     playerMove(playerChoice[2]);
 }
 );
+

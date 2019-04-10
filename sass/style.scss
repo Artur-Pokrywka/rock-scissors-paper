@@ -1,7 +1,8 @@
 .button-holder {
     display: flex;
     justify-content: center;
-    height: 400px;
+    align-items: center;
+    height: 300px;
     .btn { 
         height: 50px;
         border: none;
@@ -34,4 +35,8 @@
             border: dashed 3px #d442f4;
         }
     }
+}
+#output {
+    text-align: center;
+    color: green;
 }
