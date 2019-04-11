@@ -7,17 +7,19 @@ var buttonNewgame = document.getElementById("btn-new-game");
 var playerChoices = ["rock", "scissors", "paper"];
 var playerScore = 0;
 var computerScore = 0;
+var numberOfrounds = 0;
+var playerTotalscore = 0;
+var computerTotalscore = 0;
 
 function playerScoreincrease() {
-    playerScore ++;
-    document.getElementById("player-result").innerHTML = "Player score: " + playerScore;
+    playerTotalscore = playerScore ++;
+    document.getElementById("player-score").innerHTML = "Player score: " + playerScore;
 };
 
 function computerScoreincrease() {
-   computerScore ++;
-   document.getElementById("computer-result").innerHTML = "Computer score: " + computerScore;
+   computerTotalscore = computerScore ++;
+   document.getElementById("computer-score").innerHTML = "Computer score: " + computerScore;
 };
-
 
 function computerChoicedraw() {
     var number = Math.floor(Math.random() * 3) + 1;  
@@ -70,44 +72,41 @@ function playerMove(playerChoice) {
             document.getElementById("output").innerHTML = "You WON: you played PAPER, computer played ROCK!";
             playerScoreincrease();
         }
-    }     
+    }   
+    console.log (playerTotalscore);
+    console.log (computerTotalscore);
 };
-var numberOfrounds = 0 ;
+
 
 function newGameStarter () {
     numberOfrounds = prompt("How many won rounds will end the game?");
     document.getElementById("header").innerHTML = "Game will end after winning " + numberOfrounds + " rounds.";
-    // return numberOfrounds;
 }
-console.log (numberOfrounds);
-
+newGameStarter ();
 
 function gameWinnerVerifier () {
-    if (playerScore === numberOfrounds) {
+    if (playerTotalscore == numberOfrounds) {
+        alert("game over you won");
     }
-    else if (computerScore === numberOfrounds) {
+    else if (computerTotalscore == numberOfrounds) {
+        alert("game over you lose");
     }
-    console.log (playerScore);
-    
-};
-newGameStarter ();
-function gameWinnerAnnouncer () {
-    gameWinnerVerifier ();
-    // prompt("You won");
 };
 
-// gameWinnerAnnouncer();
 
 buttonRock.addEventListener('click', function() {
     playerMove(playerChoices[0]);
+    gameWinnerVerifier();
 }
 );
 buttonScissors.addEventListener('click', function() {
     playerMove(playerChoices[1]);
+    gameWinnerVerifier();
 }
 );
 buttonPaper.addEventListener('click', function() {
     playerMove(playerChoices[2]);
+    gameWinnerVerifier();
 }
 );
 

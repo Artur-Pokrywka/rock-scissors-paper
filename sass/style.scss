@@ -6,7 +6,7 @@
     display: flex;
     justify-content: center;
     align-items: center;
-    height: 300px;
+    height: 260px;
     .btn { 
         height: 50px;
         border: none;
@@ -41,9 +41,10 @@
     }
 }
 #output {
+    height: 50px;
     text-align: center;
     color: green;
-}
+} 
 #btn-new-game {
     background-color: red;
     &:hover {
