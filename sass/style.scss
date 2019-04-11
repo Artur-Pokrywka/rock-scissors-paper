@@ -1,3 +1,7 @@
+#header {
+    text-align: center;
+    text-transform: uppercase;
+}
 .button-holder {
     display: flex;
     justify-content: center;
@@ -39,4 +43,10 @@
 #output {
     text-align: center;
     color: green;
+}
+#btn-new-game {
+    background-color: red;
+    &:hover {
+        border: dashed 3px red;
+    }
 }

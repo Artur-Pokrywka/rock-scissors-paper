@@ -3,13 +3,13 @@
 var buttonRock = document.getElementById("btn-rock");
 var buttonScissors = document.getElementById("btn-scissors");
 var buttonPaper = document.getElementById("btn-paper");
+var buttonNewgame = document.getElementById("btn-new-game");
 var playerChoices = ["rock", "scissors", "paper"];
 var playerScore = 0;
 var computerScore = 0;
 
 function playerScoreincrease() {
     playerScore ++;
-    console.log(playerScore)
     document.getElementById("player-result").innerHTML = "Player score: " + playerScore;
 };
 
@@ -28,7 +28,7 @@ function computerChoicedraw() {
     } else if (number === 2) {
         computerMove = "rock";
         console.log (computerMove)
-    } else  {
+    } else {
         computerMove = "scissors";
         console.log (computerMove)
     }
@@ -73,6 +73,30 @@ function playerMove(playerChoice) {
     }     
 };
 
+function newGamestarter () {
+    var numberOfwiningRoundns = prompt("How many won rounds will end the game?");
+    document.getElementById("header").innerHTML = "Game will end after winning " + numberOfwiningRoundns + " rounds.";
+    return numberOfwiningRoundns;
+};
+
+function gameWinnerverifier () {
+    var numberOfwiningRoundns = newGamestarter();
+    if (playerScore === numberOfwiningRoundns) {
+    }
+    else if (computerScore === numberOfwiningRoundns) {
+    }
+    console.log (playerScore);
+    console.log (numberOfwiningRoundns);
+};
+gameWinnerverifier ();
+
+function gameWinnerannouncer () {
+    gameWinnerverifier ();
+    // prompt("You won");
+};
+
+// gameWinnerannouncer();
+
 buttonRock.addEventListener('click', function() {
     playerMove(playerChoices[0]);
 }
@@ -83,6 +107,11 @@ buttonScissors.addEventListener('click', function() {
 );
 buttonPaper.addEventListener('click', function() {
     playerMove(playerChoices[2]);
+}
+);
+
+buttonNewgame.addEventListener('click', function() {
+   newGamestarter();
 }
 );
 
