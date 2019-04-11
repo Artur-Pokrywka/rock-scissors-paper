@@ -72,30 +72,31 @@ function playerMove(playerChoice) {
         }
     }     
 };
+var numberOfrounds = 0 ;
 
-function newGamestarter () {
-    var numberOfwiningRoundns = prompt("How many won rounds will end the game?");
-    document.getElementById("header").innerHTML = "Game will end after winning " + numberOfwiningRoundns + " rounds.";
-    return numberOfwiningRoundns;
-};
+function newGameStarter () {
+    numberOfrounds = prompt("How many won rounds will end the game?");
+    document.getElementById("header").innerHTML = "Game will end after winning " + numberOfrounds + " rounds.";
+    // return numberOfrounds;
+}
+console.log (numberOfrounds);
 
-function gameWinnerverifier () {
-    var numberOfwiningRoundns = newGamestarter();
-    if (playerScore === numberOfwiningRoundns) {
+
+function gameWinnerVerifier () {
+    if (playerScore === numberOfrounds) {
     }
-    else if (computerScore === numberOfwiningRoundns) {
+    else if (computerScore === numberOfrounds) {
     }
     console.log (playerScore);
-    console.log (numberOfwiningRoundns);
+    
 };
-gameWinnerverifier ();
-
-function gameWinnerannouncer () {
-    gameWinnerverifier ();
+newGameStarter ();
+function gameWinnerAnnouncer () {
+    gameWinnerVerifier ();
     // prompt("You won");
 };
 
-// gameWinnerannouncer();
+// gameWinnerAnnouncer();
 
 buttonRock.addEventListener('click', function() {
     playerMove(playerChoices[0]);
@@ -111,7 +112,7 @@ buttonPaper.addEventListener('click', function() {
 );
 
 buttonNewgame.addEventListener('click', function() {
-   newGamestarter();
+   newGameStarter();
 }
 );
 
