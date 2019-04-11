@@ -8,17 +8,19 @@ var playerChoices = ["rock", "scissors", "paper"];
 var playerScore = 0;
 var computerScore = 0;
 var numberOfrounds = 0;
-var playerTotalscore = 0;
-var computerTotalscore = 0;
 
 function playerScoreincrease() {
-    playerTotalscore = playerScore ++;
-    document.getElementById("player-score").innerHTML = "Player score: " + playerScore;
+    if (playerScore < numberOfrounds) {
+        playerScore = playerScore +1;
+        document.getElementById("player-score").innerHTML = "Player score: " + playerScore;
+    }  
 };
 
 function computerScoreincrease() {
-   computerTotalscore = computerScore ++;
-   document.getElementById("computer-score").innerHTML = "Computer score: " + computerScore;
+    if (computerScore < numberOfrounds) {
+        computerScore = computerScore +1;
+        document.getElementById("computer-score").innerHTML = "Computer score: " + computerScore;
+    }
 };
 
 function computerChoicedraw() {
@@ -73,8 +75,8 @@ function playerMove(playerChoice) {
             playerScoreincrease();
         }
     }   
-    console.log (playerTotalscore);
-    console.log (computerTotalscore);
+    console.log (playerScore);
+    console.log (computerScore);
 };
 
 
@@ -85,33 +87,50 @@ function newGameStarter () {
 newGameStarter ();
 
 function gameWinnerVerifier () {
-    if (playerTotalscore == numberOfrounds) {
-        alert("game over you won");
+    if (playerScore == numberOfrounds) {
+        document.getElementById("final-score").innerHTML = "YOU WON THE ENTIRE GAME!!!";
     }
-    else if (computerTotalscore == numberOfrounds) {
-        alert("game over you lose");
+    else if (computerScore == numberOfrounds) {
+        document.getElementById("final-score").innerHTML = "YOU LOSE THE ENTIRE GAME!!!";
     }
+};
+function newGameEnforcer () {
+    if (playerScore >= numberOfrounds) {
+        alert ("Game over, please press the new game button!")
+    }
+    else if (computerScore >= numberOfrounds) {
+        alert ("Game over, please press the new game button!")
+    }
+}
+
+function gameScoreCleaner () {
+    document.getElementById("player-score").innerHTML = "Player score: " + (playerScore = 0);
+    document.getElementById("computer-score").innerHTML = "Computer score: " + (computerScore = 0);
 };
 
 
 buttonRock.addEventListener('click', function() {
     playerMove(playerChoices[0]);
     gameWinnerVerifier();
+    newGameEnforcer ();
 }
 );
 buttonScissors.addEventListener('click', function() {
     playerMove(playerChoices[1]);
     gameWinnerVerifier();
+    newGameEnforcer ();
 }
 );
 buttonPaper.addEventListener('click', function() {
     playerMove(playerChoices[2]);
     gameWinnerVerifier();
+    newGameEnforcer ();
 }
 );
 
 buttonNewgame.addEventListener('click', function() {
    newGameStarter();
+   gameScoreCleaner();
 }
 );
 
