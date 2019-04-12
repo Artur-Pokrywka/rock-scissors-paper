@@ -1,4 +1,4 @@
-#header {
+#header, .score {
     text-align: center;
     text-transform: uppercase;
 }
@@ -6,7 +6,7 @@
     display: flex;
     justify-content: center;
     align-items: center;
-    height: 260px;
+    height: 220px;
     .btn { 
         height: 50px;
         border: none;
@@ -45,12 +45,17 @@
     text-align: center;
     color: green;
 } 
+#final-score {
+    font-size: 40px;
+    color: goldenrod;
+}
 #btn-new-game {
     background-color: red;
     &:hover {
         border: dashed 3px red;
     } 
 }
+
 .btn-hide {
     display: none;
     background: #d442f4;

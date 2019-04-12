@@ -9,21 +9,20 @@ var playerScore = 0;
 var computerScore = 0;
 var numberOfrounds = 0;
 
-function playerScoreincrease() {
+function increasePlayerScore() {
     if (playerScore < numberOfrounds) {
         playerScore = playerScore +1;
         document.getElementById("player-score").innerHTML = "Player score: " + playerScore;
     }  
 };
-
-function computerScoreincrease() {
+function increaseComputerScore() {
     if (computerScore < numberOfrounds) {
         computerScore = computerScore +1;
         document.getElementById("computer-score").innerHTML = "Computer score: " + computerScore;
     }
 };
 
-function computerChoicedraw() {
+function drawComputerChoice() {
     var number = Math.floor(Math.random() * 3) + 1;  
     var computerMove;
     if (number === 1) {
@@ -39,52 +38,50 @@ function computerChoicedraw() {
     return computerMove;
 };
 
-function playerMove(playerChoice) {
-    var computerMove = computerChoicedraw();
-    
+function chooseRoundWinner(playerChoice) {
+    var computerMove = drawComputerChoice();   
     if (playerChoice === computerMove) {
         document.getElementById("output").innerHTML = "It's a DRAW!";
     }
     else if (playerChoice === "rock") {
         if (computerMove === "paper") {
             document.getElementById("output").innerHTML = "You LOOSE: you played ROCK, computer played PAPER!";
-            computerScoreincrease();
+            increaseComputerScore();
         }
         else {
             document.getElementById("output").innerHTML = "You WON: you played ROCK, computer played SCISSORS!";
-            playerScoreincrease();
+            increasePlayerScore();
         }
     }   
     else if (playerChoice === "scissors") {
         if (computerMove === "rock") {
             document.getElementById("output").innerHTML = "You LOOSE: you played SCISSORS, computer played ROCK!";
-            computerScoreincrease();
+            increaseComputerScore();
         }
         else {
             document.getElementById("output").innerHTML = "You WON: you played SCISSORS, computer played PAPER!";
-            playerScoreincrease();
+            increasePlayerScore();
         }
     } 
     else if (playerChoice === "paper") {
         if (computerMove === "scissors") {
             document.getElementById("output").innerHTML = "You LOOSE: you played PAPER, computer played SCISSORS!";
-            computerScoreincrease();
+            increaseComputerScore();
         }
         else {
             document.getElementById("output").innerHTML = "You WON: you played PAPER, computer played ROCK!";
-            playerScoreincrease();
+            increasePlayerScore();
         }
     }   
 };
 
-
-function newGameStarter () {
+function startNewGame() {
     numberOfrounds = prompt("How many won rounds will end the game?");
     document.getElementById("header").innerHTML = "Game will end after winning " + numberOfrounds + " rounds.";
 }
-newGameStarter ();
+startNewGame ();
 
-function gameWinnerVerifier () {
+function verifyGameWinner() {
     if (playerScore == numberOfrounds) {
         document.getElementById("final-score").innerHTML = "YOU WON THE ENTIRE GAME!!!";
     }
@@ -93,52 +90,52 @@ function gameWinnerVerifier () {
     }
 };
 
-function newGameEnforcer () {
-    if (playerScore >= numberOfrounds) {       
+function newGameEnforcer() {
+    if (playerScore >= numberOfrounds || computerScore >= numberOfrounds) {       
        hideButtons ();
-    }
-    else if (computerScore >= numberOfrounds) {
-        hideButtons();
-    }         
+    };
+    // else if (computerScore >= numberOfrounds) {
+    //     hideButtons();
+    // }         
 };
 
-function hideButtons () {
-    var element = document.getElementsByClassName("buttton-holder");
-    element.classList.add("btn-hide"); 
-    // console.log("hi"); 
+function hideButtons() {
+    var element = document.getElementById("buttons-holder");
+    element.classList.toggle("btn-hide"); 
 };
 
 
 
-function gameScoreCleaner () {
+function cleanGameScore () {
+    document.getElementById("output").innerHTML = "";
     document.getElementById("player-score").innerHTML = "Player score: " + (playerScore = 0);
     document.getElementById("computer-score").innerHTML = "Computer score: " + (computerScore = 0);
+    document.getElementById("final-score").innerHTML = "";
 };
 
-
-
 buttonRock.addEventListener('click', function() {
-    playerMove(playerChoices[0]);
-    gameWinnerVerifier();
+    chooseRoundWinner(playerChoices[0]);
+    verifyGameWinner();
     newGameEnforcer ();
 }
 );
 buttonScissors.addEventListener('click', function() {
-    playerMove(playerChoices[1]);
-    gameWinnerVerifier();
+    chooseRoundWinner(playerChoices[1]);
+    verifyGameWinner();
     newGameEnforcer ();
 }
 );
 buttonPaper.addEventListener('click', function() {
-    playerMove(playerChoices[2]);
-    gameWinnerVerifier();
+    chooseRoundWinner(playerChoices[2]);
+    verifyGameWinner();
     newGameEnforcer ();
 }
 );
 
 buttonNewgame.addEventListener('click', function() {
-   newGameStarter();
-    gameScoreCleaner();
+    startNewGame();
+    cleanGameScore();
+    hideButtons();
 }
 );
 
