@@ -1,6 +1,10 @@
 #header, .score {
     text-align: center;
     text-transform: uppercase;
+    #final-score {
+        font-size: 40px;
+        color: goldenrod;
+    }
 }
 .button-holder {
     display: flex;
@@ -39,23 +43,18 @@
             border: dashed 3px #d442f4;
         }
     }
+    #btn-new-game {
+        background-color: red;
+        &:hover {
+            border: dashed 3px red;
+        } 
+    }
 }
 #output {
     height: 50px;
     text-align: center;
     color: green;
 } 
-#final-score {
-    font-size: 40px;
-    color: goldenrod;
-}
-#btn-new-game {
-    background-color: red;
-    &:hover {
-        border: dashed 3px red;
-    } 
-}
-
 .btn-hide {
     display: none;
     background: #d442f4;

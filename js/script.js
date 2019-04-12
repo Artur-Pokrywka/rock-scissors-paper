@@ -3,20 +3,21 @@
 var buttonRock = document.getElementById("btn-rock");
 var buttonScissors = document.getElementById("btn-scissors");
 var buttonPaper = document.getElementById("btn-paper");
-var buttonNewgame = document.getElementById("btn-new-game");
+var buttonNewGame = document.getElementById("btn-new-game");
 var playerChoices = ["rock", "scissors", "paper"];
 var playerScore = 0;
 var computerScore = 0;
-var numberOfrounds = 0;
+var numberOfRounds = 0;
+var buttonsArray = document.getElementsByClassName("btn-g");
 
 function increasePlayerScore() {
-    if (playerScore < numberOfrounds) {
+    if (playerScore < numberOfRounds) {
         playerScore = playerScore +1;
         document.getElementById("player-score").innerHTML = "Player score: " + playerScore;
     }  
 };
 function increaseComputerScore() {
-    if (computerScore < numberOfrounds) {
+    if (computerScore < numberOfRounds) {
         computerScore = computerScore +1;
         document.getElementById("computer-score").innerHTML = "Computer score: " + computerScore;
     }
@@ -27,13 +28,10 @@ function drawComputerChoice() {
     var computerMove;
     if (number === 1) {
         computerMove = "paper";
-        console.log (computerMove)
     } else if (number === 2) {
         computerMove = "rock";
-        console.log (computerMove)
     } else {
         computerMove = "scissors";
-        console.log (computerMove)
     }
     return computerMove;
 };
@@ -77,27 +75,31 @@ function chooseRoundWinner(playerChoice) {
 };
 
 function verifyGameWinner() {
-    if (playerScore == numberOfrounds) {
+    if (playerScore == numberOfRounds) {
         document.getElementById("final-score").innerHTML = "YOU WON THE ENTIRE GAME!!!";
         hideButtons();
     }
-    else if (computerScore == numberOfrounds) {
+    else if (computerScore == numberOfRounds) {
         document.getElementById("final-score").innerHTML = "YOU LOSE THE ENTIRE GAME!!!";
         hideButtons();
     }
 };
 
 function hideButtons() {
-    var elements = document.getElementsByClassName("btn");
-    for (var i = 0; i < elements.length; i++) { 
-        elements.classList.add("btn-hide");
-    }   
-    console.log(i);    
+    for (var i = 0; i < buttonsArray.length; i++) { 
+        buttonsArray[i].classList.add("btn-hide");
+    }       
+};
+function showButtons() {
+    for (var i = 0; i < buttonsArray.length; i++) { 
+        buttonsArray[i].classList.remove("btn-hide");
+    }       
 };
 
 function startNewGame() {
-    numberOfrounds = prompt("How many won rounds will end the game?");
-    document.getElementById("header").innerHTML = "Game will end after winning " + numberOfrounds + " rounds.";
+    numberOfRounds = prompt("How many won rounds will end the game?");
+    document.getElementById("header").innerHTML = "Game will end after winning " + numberOfRounds + " rounds.";
+    showButtons();
 }
 
 function cleanGameScore () {
@@ -120,7 +122,7 @@ buttonPaper.addEventListener('click', function() {
 }
 );
 
-buttonNewgame.addEventListener('click', function() {
+buttonNewGame.addEventListener('click', function() {
     startNewGame();
     cleanGameScore();
 }
