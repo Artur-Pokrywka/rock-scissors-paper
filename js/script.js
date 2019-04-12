@@ -75,8 +75,6 @@ function playerMove(playerChoice) {
             playerScoreincrease();
         }
     }   
-    console.log (playerScore);
-    console.log (computerScore);
 };
 
 
@@ -94,19 +92,29 @@ function gameWinnerVerifier () {
         document.getElementById("final-score").innerHTML = "YOU LOSE THE ENTIRE GAME!!!";
     }
 };
+
 function newGameEnforcer () {
-    if (playerScore >= numberOfrounds) {
-        alert ("Game over, please press the new game button!")
+    if (playerScore >= numberOfrounds) {       
+       hideButtons ();
     }
     else if (computerScore >= numberOfrounds) {
-        alert ("Game over, please press the new game button!")
-    }
-}
+        hideButtons();
+    }         
+};
+
+function hideButtons () {
+    var element = document.getElementsByClassName("buttton-holder");
+    element.classList.add("btn-hide"); 
+    // console.log("hi"); 
+};
+
+
 
 function gameScoreCleaner () {
     document.getElementById("player-score").innerHTML = "Player score: " + (playerScore = 0);
     document.getElementById("computer-score").innerHTML = "Computer score: " + (computerScore = 0);
 };
+
 
 
 buttonRock.addEventListener('click', function() {
@@ -130,7 +138,7 @@ buttonPaper.addEventListener('click', function() {
 
 buttonNewgame.addEventListener('click', function() {
    newGameStarter();
-   gameScoreCleaner();
+    gameScoreCleaner();
 }
 );
 

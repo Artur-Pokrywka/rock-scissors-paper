@@ -64,4 +64,9 @@
   border: dashed 3px red;
 }
 
+.btn-hide {
+  display: none;
+  background: #d442f4;
+}
+
 /*# sourceMappingURL=style.css.map */
