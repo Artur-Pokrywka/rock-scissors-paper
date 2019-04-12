@@ -72,39 +72,33 @@ function chooseRoundWinner(playerChoice) {
             document.getElementById("output").innerHTML = "You WON: you played PAPER, computer played ROCK!";
             increasePlayerScore();
         }
+    }
+    verifyGameWinner();   
+};
+
+function verifyGameWinner() {
+    if (playerScore == numberOfrounds) {
+        document.getElementById("final-score").innerHTML = "YOU WON THE ENTIRE GAME!!!";
+        hideButtons();
+    }
+    else if (computerScore == numberOfrounds) {
+        document.getElementById("final-score").innerHTML = "YOU LOSE THE ENTIRE GAME!!!";
+        hideButtons();
+    }
+};
+
+function hideButtons() {
+    var elements = document.getElementsByClassName("btn");
+    for (var i = 0; i < elements.length; i++) { 
+        elements.classList.add("btn-hide");
     }   
+    console.log(i);    
 };
 
 function startNewGame() {
     numberOfrounds = prompt("How many won rounds will end the game?");
     document.getElementById("header").innerHTML = "Game will end after winning " + numberOfrounds + " rounds.";
 }
-startNewGame ();
-
-function verifyGameWinner() {
-    if (playerScore == numberOfrounds) {
-        document.getElementById("final-score").innerHTML = "YOU WON THE ENTIRE GAME!!!";
-    }
-    else if (computerScore == numberOfrounds) {
-        document.getElementById("final-score").innerHTML = "YOU LOSE THE ENTIRE GAME!!!";
-    }
-};
-
-function newGameEnforcer() {
-    if (playerScore >= numberOfrounds || computerScore >= numberOfrounds) {       
-       hideButtons ();
-    };
-    // else if (computerScore >= numberOfrounds) {
-    //     hideButtons();
-    // }         
-};
-
-function hideButtons() {
-    var element = document.getElementById("buttons-holder");
-    element.classList.toggle("btn-hide"); 
-};
-
-
 
 function cleanGameScore () {
     document.getElementById("output").innerHTML = "";
@@ -115,27 +109,20 @@ function cleanGameScore () {
 
 buttonRock.addEventListener('click', function() {
     chooseRoundWinner(playerChoices[0]);
-    verifyGameWinner();
-    newGameEnforcer ();
 }
 );
 buttonScissors.addEventListener('click', function() {
     chooseRoundWinner(playerChoices[1]);
-    verifyGameWinner();
-    newGameEnforcer ();
 }
 );
 buttonPaper.addEventListener('click', function() {
     chooseRoundWinner(playerChoices[2]);
-    verifyGameWinner();
-    newGameEnforcer ();
 }
 );
 
 buttonNewgame.addEventListener('click', function() {
     startNewGame();
     cleanGameScore();
-    hideButtons();
 }
 );
 
