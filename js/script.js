@@ -8,7 +8,7 @@ var playerChoices = ["rock", "scissors", "paper"];
 var playerScore = 0;
 var computerScore = 0;
 var numberOfRounds = 0;
-var buttonsArray = document.getElementsByClassName("btn-g");
+var buttonsArray = document.getElementsByClassName("player-move");
 
 function increasePlayerScore() {
     if (playerScore < numberOfRounds) {
@@ -36,8 +36,26 @@ function drawComputerChoice() {
     return computerMove;
 };
 
+
+function getPlayerChoice(buttonsArray) {
+    
+    var playerPick = buttonsArray.getAttribute("data-move"); 
+    
+    chooseRoundWinner();
+    return playerPick;
+   
+};
+
+
+
+
+
 function chooseRoundWinner(playerChoice) {
-    var computerMove = drawComputerChoice();   
+    var computerMove = drawComputerChoice();
+
+    var playerPick = getPlayerChoice();  
+    console.log(playerPick);
+
     if (playerChoice === computerMove) {
         document.getElementById("output").innerHTML = "It's a DRAW!";
     }
@@ -110,14 +128,17 @@ function cleanGameScore () {
 };
 
 buttonRock.addEventListener('click', function() {
+    getPlayerChoice(buttonsArray[0]);
     chooseRoundWinner(playerChoices[0]);
 }
 );
 buttonScissors.addEventListener('click', function() {
+    getPlayerChoice(buttonsArray[1]);
     chooseRoundWinner(playerChoices[1]);
 }
 );
 buttonPaper.addEventListener('click', function() {
+    getPlayerChoice(buttonsArray[2]);
     chooseRoundWinner(playerChoices[2]);
 }
 );
