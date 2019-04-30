@@ -1,10 +1,6 @@
 #header, .score {
     text-align: center;
     text-transform: uppercase;
-    #final-score {
-        font-size: 40px;
-        color: goldenrod;
-    }
 } 
 .button-holder {
     display: flex;
@@ -58,4 +54,56 @@
 .btn-hide {
     display: none;
     background: #d442f4;
+}
+#score { 
+    border: 1px, black, solid;
+}
+// MODALS
+.overlay {
+	display: none;
+	position: fixed;
+	top: 0;
+	left: 0;
+	width: 100%;
+	height: 100%;
+	background: rgba(0, 0, 0, 0.7);
+	&.show {
+		display: block;
+	}
+}
+
+.modal {
+	background: #fff;
+	width: 400px;
+	position: absolute;
+	top: 50%;
+	left: 50%;
+	transform: translate3d(-50%, -50%, 0);
+	&.show {
+		display: block;
+    }
+	.close {
+		position: absolute;
+		right: 0;
+		top: 0;
+		padding: 5px;
+		color: #000;
+		text-decoration: none;
+	}
+	
+	header {
+        margin-top: 20px;
+        text-align: center;
+        font-size: 40px;
+		line-height: 30px;
+		min-height: 30px;
+		font-weight: bold;
+        padding: 0 30px;
+        color: goldenrod;
+	}
+
+	.content {
+		min-height: 30px;
+		padding: 5px 30px;
+	}
 }
