@@ -10,19 +10,32 @@ var gameStatus = {
     computerScore : 0,
     numberOfRounds : 0,
     currentRoundNumber : 0,
-    roundResult : "Draw", 
+    roundResult : "", 
     playerCurrentResult : 0,
     computerCurrentResult : 0,
 };
+//  var currentResult = gameStatus.playerCurrentResult + " : " + gameStatus.computerCurrentResult;
 var gameStatusProgress = [];
 var modal = document.getElementById("modal-overlay");
+var resultTable = document.getElementById("score");
+
 
 function roundCounter() {
     gameStatus.currentRoundNumber = gameStatus.currentRoundNumber +1;
 };
 
-function roundResultAnouncer (winner) {
-    gameStatus.roundResult = winner + " won this round";
+function roundResultAnouncer(winner) {
+    if (winner != "Draw"){
+        gameStatus.roundResult = winner + " won";
+    }
+    else {
+        gameStatus.roundResult = winner;
+    }    
+}
+
+function updateRoundState(winner) {
+    roundCounter();
+    roundResultAnouncer(winner);
 }
 
 function increasePlayerScore() {
@@ -31,17 +44,15 @@ function increasePlayerScore() {
         gameStatus.playerCurrentResult = gameStatus.playerScore;
         document.getElementById("player-score").innerHTML = "Player score: " + gameStatus.playerCurrentResult;
     }  
-    roundCounter();
-    roundResultAnouncer("Player");
+    updateRoundState("Player");
 };
 function increaseComputerScore() {
     if (gameStatus.computerScore < gameStatus.numberOfRounds) {
         gameStatus.computerScore = gameStatus.computerScore +1;
-        gameStatus.computerCurrentResult = gameStatus.computerScore;
+        gameStatus.computerCurrentResult = gameStatus.playerScore;
         document.getElementById("computer-score").innerHTML = "Computer score: " + gameStatus.computerCurrentResult;
     }
-    roundCounter();
-    roundResultAnouncer("Computer");
+    updateRoundState("Computer");
 };
 
 function drawComputerChoice() {
@@ -67,6 +78,7 @@ function chooseRoundWinner(element) {
     var playerPick = getPlayerChoice(element);  
     if (playerPick === computerMove) {
         document.getElementById("output").innerHTML = "It's a DRAW!";
+        updateRoundState("Draw");
     }
     else if (playerPick === "rock") {
         if (computerMove === "paper") {
@@ -98,8 +110,15 @@ function chooseRoundWinner(element) {
             increasePlayerScore();
         }
     }
-    gameStatusProgress.push(gameStatus);
-    console.log(gameStatusProgress);
+    var currentResult = gameStatus.playerCurrentResult + " : " + gameStatus.computerCurrentResult;
+    gameStatusProgress.push({
+        currentRoundNumber: gameStatus.currentRoundNumber,
+        playerPick: playerPick,
+        computerMove: computerMove,
+        roundResult: gameStatus.roundResult,
+        currentResult: currentResult
+    });
+    console.log(currentResult)
     verifyGameWinner();   
 };
 
@@ -107,16 +126,15 @@ function verifyGameWinner() {
     if (gameStatus.playerScore == gameStatus.numberOfRounds) {
         document.getElementById("game-result").innerHTML = "YOU WON!";  
         modal.classList.add("show");
-        resultTableDisplayer();
+        resultTableBuilder();
         hideButtons();
     }
     else if (gameStatus.computerScore == gameStatus.numberOfRounds) {
         document.getElementById("game-result").innerHTML = "YOU LOOSE!";
         modal.classList.add("show");
-        resultTableDisplayer();
+        resultTableBuilder();
         hideButtons();
     }
-    document.getElementById("score").innerHTML = gameStatus.progress;
 };
 
 function hideButtons() {
@@ -141,6 +159,8 @@ function cleanGameScore () {
     document.getElementById("player-score").innerHTML = "Player score: " + (gameStatus.playerScore = 0);
     document.getElementById("computer-score").innerHTML = "Computer score: " + (gameStatus.computerScore = 0);
     gameStatusProgress = [];
+    gameStatus.playerCurrentResult = 0;
+    gameStatus.computerCurrentResult = 0;
 };
 
 buttonRock.addEventListener('click', function() {
@@ -162,26 +182,25 @@ buttonNewGame.addEventListener('click', function() {
 }
 );
 
-function resultTableTemplate() {
-    `<tr>
-        <td>${gameStatus.currentRoundNumber}</td>
-        <td>${gameStatus.playerPick}</td>
-        <td>${gameStatus.roundResult}</td>
-        <td>${gameStatus.playerCurrentResult}</td>
-        <td>${gameStatus.computerCurrentResult}</td>
-    </tr>`
+function resultTableTemplate(historyStatus) {
+    return `
+            <td>${historyStatus.currentRoundNumber}</td>
+            <td>${historyStatus.playerPick}</td>
+            <td>${historyStatus.computerMove}</td>
+            <td>${historyStatus.roundResult}</td>
+            <td>${historyStatus.currentResult}</td>
+            `
 };
 
 function resultTableBuilder() {
     for (var i = 0; i < gameStatusProgress.length; i++) {
-        resultTableTemplate();
+        var historyStatus = gameStatusProgress[i];
+        var singleResultRow = resultTableTemplate(historyStatus);
+        var rowElement = document.createElement("tr");
+        rowElement.innerHTML = singleResultRow;
+        resultTable.appendChild(rowElement);
     }
 };
-function resultTableDisplayer() {
-    var tableHeader  = document.getElementById("table-headline").innerText;
-    console.log(tableHeader);
-}
-resultTableDisplayer();
 
 
 // MODALS
@@ -192,35 +211,28 @@ resultTableDisplayer();
 		document.querySelector('#modal-overlay').classList.add('show');
 	};
 	
-	// Mimo, że obecnie mamy tylko jeden link, stosujemy kod dla wielu linków. W ten sposób nie będzie trzeba go zmieniać, kiedy zechcemy mieć więcej linków lub guzików otwierających modale
-	
+	// Stosujemy kod dla wielu linków. W ten sposób trzeba go zmieniać, kiedy zechcemy mieć więcej linków lub guzików otwierających modale
 	var modalLinks = document.querySelectorAll('.show-modal');
-	
 	for(var i = 0; i < modalLinks.length; i++){
 		modalLinks[i].addEventListener('click', showModal);
 	}
 	
-	// Dodajemy też funkcję zamykającą modal, oraz przywiązujemy ją do kliknięć na elemencie z klasą "close". 
-
+	// Funkcja zamykająca modal - przywiązujemy ją do kliknięć na elemencie z klasą "close". 
 	var hideModal = function(event){
 		event.preventDefault();
 		document.querySelector('#modal-overlay').classList.remove('show');
 	};
-	
 	var closeButtons = document.querySelectorAll('.modal .close');
 	
 	for(var i = 0; i < closeButtons.length; i++){
 		closeButtons[i].addEventListener('click', hideModal);
 	}
 	
-	// Dobrą praktyką jest również umożliwianie zamykania modala poprzez kliknięcie w overlay. 
-	
+	// Zamykania modala poprzez kliknięcie w overlay. 
 	document.querySelector('#modal-overlay').addEventListener('click', hideModal);
 	
-	// Musimy jednak pamiętać, aby zablokować propagację kliknięć z samego modala - inaczej każde kliknięcie wewnątrz modala również zamykałoby go. 
-	
+	// Blokowanie propagacji kliknięć z samego modala - inaczej każde kliknięcie wewnątrz modala również zamykałoby go. 
 	var modals = document.querySelectorAll('.modal');
-	
 	for(var i = 0; i < modals.length; i++){
 		modals[i].addEventListener('click', function(event){
 			event.stopPropagation();

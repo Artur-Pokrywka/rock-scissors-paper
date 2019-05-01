@@ -55,8 +55,20 @@
     display: none;
     background: #d442f4;
 }
-#score { 
-    border: 1px, black, solid;
+#score {   
+    border: 2px solid black; 
+    border-collapse: collapse;
+    text-align: center;
+    margin-top: 20px;
+    #table-head {
+        color: red;
+    }
+    tr {
+        td {
+            border: 1px solid black;
+            padding: 1px;
+        }
+    }
 }
 // MODALS
 .overlay {
@@ -74,7 +86,7 @@
 
 .modal {
 	background: #fff;
-	width: 400px;
+	width: 450px;
 	position: absolute;
 	top: 50%;
 	left: 50%;
