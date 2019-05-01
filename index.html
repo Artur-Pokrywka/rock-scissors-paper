@@ -1,14 +1,55 @@
 <!DOCTYPE html>
 <html>
+
 <head>
     <meta charset="utf-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <title>Rock-scissors-paper</title>
+    <title>rock-scissors-paper</title>
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <link rel="stylesheet" type="text/css" media="screen" href="./css/style.css">
-    <script src="./js/script.js"></script>
 </head>
+
 <body>
-    
+    <div id="header">
+    </div>
+
+    <div class="button-holder" id="buttons-holder">
+        <button class="btn btn-hide player-move" id="btn-rock" data-move="rock">Rock</button>
+        <button class="btn btn-hide player-move" id="btn-scissors" data-move="scissors">Scissors</button>
+        <button class="btn btn-hide player-move" id="btn-paper" data-move="paper">Paper</button>
+    </div>
+
+    <div id="output">
+    </div>
+
+    <div class="score">
+        <p id="player-score">Player score: 0 </p>
+        <p id="computer-score">Computer score: 0 </p>
+    </div>
+
+    <div class="button-holder">
+        <button class="btn" id="btn-new-game">New Game!</button>
+    </div>
+    <!-- MODAL -->
+    <div class="overlay" id="modal-overlay">
+        <div class="modal" id="modal-one">
+            <a href="#" class="close">x</a>
+            <header id="game-result">Lorem ipsum</header>
+            <div class="content">
+                <table id="score">
+                    <tr id="table-head"> 
+                        <td>Round</td>
+                        <td>Player move</td>
+                        <td>Computer move</td>
+                        <td>Round result</td>
+                        <td>Current score</td>
+                    </tr>
+                </table>
+            </div>
+        </div>
+    </div>
+
+    <script src="./js/script.js"></script>
 </body>
+
 </html>

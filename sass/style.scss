@@ -1,0 +1,121 @@
+#header, .score {
+    text-align: center;
+    text-transform: uppercase;
+} 
+.button-holder {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 220px;
+    .btn { 
+        height: 50px;
+        border: none;
+        border-radius: 3px;
+        padding: 15px 32px;
+        text-align: center;
+        text-decoration: none;
+        font-size: 20px;
+        margin: 15px;
+        color:  #fff;
+        &:hover {
+            cursor: pointer;
+        }
+    }  
+    #btn-rock {
+        background-color: #5A4D41; 
+        &:hover {
+            border: dashed 3px #5A4D41;
+        }
+    }
+    #btn-paper {
+        background-color: #e0d3af;
+        &:hover {
+            border: dashed 3px #e0d3af;
+        }
+    }
+    #btn-scissors {
+        background-color: #d442f4;
+        &:hover {
+            border: dashed 3px #d442f4;
+        }
+    }
+    #btn-new-game {
+        background-color: red;
+        &:hover {
+            border: dashed 3px red;
+        } 
+    }
+}
+#output {
+    height: 50px;
+    text-align: center;
+    color: green;
+} 
+.btn-hide {
+    display: none;
+    background: #d442f4;
+}
+#score {   
+    border: 2px solid black; 
+    border-collapse: collapse;
+    text-align: center;
+    margin-top: 20px;
+    #table-head {
+        color: red;
+    }
+    tr {
+        td {
+            border: 1px solid black;
+            padding: 1px;
+        }
+    }
+}
+// MODALS
+.overlay {
+	display: none;
+	position: fixed;
+	top: 0;
+	left: 0;
+	width: 100%;
+	height: 100%;
+	background: rgba(0, 0, 0, 0.7);
+	&.show {
+		display: block;
+	}
+}
+
+.modal {
+	background: #fff;
+	width: 450px;
+	position: absolute;
+	top: 50%;
+	left: 50%;
+	transform: translate3d(-50%, -50%, 0);
+	&.show {
+		display: block;
+    }
+	.close {
+		position: absolute;
+		right: 0;
+		top: 0;
+		padding: 5px;
+		color: #000;
+		text-decoration: none;
+	}
+	
+	header {
+        margin-top: 20px;
+        text-align: center;
+        font-size: 40px;
+		line-height: 30px;
+		min-height: 30px;
+		font-weight: bold;
+        padding: 0 30px;
+        color: goldenrod;
+	}
+
+	.content {
+		min-height: 30px;
+		padding: 5px 30px;
+	}
+}
